@@ -1,6 +1,6 @@
 'use client'
 
-import { formatDecimal } from "@/app/utils/FormatDecimal";
+import { formatDecimal } from "@/utils/FormatDecimal";
 import NavBar from "@/components/NavBar";
 import { useDueById } from "@/hooks/useDueById";
 import { useDueUpdate } from "@/hooks/useDueUpdate";

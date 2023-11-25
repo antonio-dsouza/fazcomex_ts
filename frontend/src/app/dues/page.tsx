@@ -4,7 +4,7 @@ import NavBar from '@/components/NavBar';
 import { useDues } from '@/hooks/useDues';
 import { Due } from '@/interface/Due';
 import { useState, useEffect } from 'react';
-import { formatDecimal } from '../utils/FormatDecimal';
+import { formatDecimal } from '../../utils/FormatDecimal';
 
 export default function Dues() {
   const [dues, setDues] = useState<Due[] | []>([]);
