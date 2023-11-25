@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model due_itens {
+  id                     Int      @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  due_id                 Int
+  item                   Int
+  nfe_chave              String   @db.VarChar(44)
+  nfe_numero             String   @db.VarChar(9)
+  nfe_serie              String   @db.VarChar(3)
+  nfe_item               Int
+  descricao_complementar String   @db.LongText
+  ncm                    String   @db.VarChar(8)
+  vmle_moeda             Decimal? @db.Decimal(17, 2)
+  vmcv_moeda             Decimal? @db.Decimal(17, 2)
+  peso_liquido           Decimal? @db.Decimal(17, 5)
+  enquadramento1         String?  @db.VarChar(5)
+  enquadramento2         String?  @db.VarChar(5)
+  enquadramento3         String?  @db.VarChar(5)
+  enquadramento4         String?  @db.VarChar(5)
+  dues                   dues     @relation(fields: [due_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "due_FK")
+
+  @@index([due_id], map: "due_FK_idx")
+}
+
+model dues {
+  id                         Int         @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  declarante_cpf_cnpj        String      @db.VarChar(14)
+  declarante_razao_social    String      @db.VarChar(255)
+  identificacao              String      @db.VarChar(255)
+  numero                     String      @db.VarChar(50)
+  moeda                      Int
+  incoterm                   String      @db.VarChar(3)
+  informacoes_complementares String?     @db.LongText
+  total_vmle_moeda           Decimal?    @db.Decimal(17, 2)
+  total_vmcv_moeda           Decimal?    @db.Decimal(17, 2)
+  total_peso_liquido         Decimal?    @db.Decimal(17, 2)
+  due_itens                  due_itens[]
+}
